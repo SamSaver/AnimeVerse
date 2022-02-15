@@ -50,56 +50,46 @@ function AdvanceSearch({ queryListSetter }) {
     queryListSetter(res.results);
   };
 
+  const PickerDiv = ({ selectedValue, setSelectedValue, data }) => (
+    <View style={styles.picker_div}>
+      <Picker
+        selectedValue={selectedValue}
+        style={styles.picker}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+      >
+        {data.map((item) => (
+          <Picker.Item
+            key={item.key || item.label}
+            label={item.label}
+            value={item.value}
+          />
+        ))}
+      </Picker>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.picker_group}>
-        <View style={styles.picker_div}>
-          <Picker
-            selectedValue={type}
-            style={styles.picker}
-            onValueChange={(itemValue, itemIndex) => setType(itemValue)}
-          >
-            {type_data.map((item) => (
-              <Picker.Item
-                key={item.label}
-                label={item.label}
-                value={item.value}
-              />
-            ))}
-          </Picker>
-        </View>
-        <View style={styles.picker_div}>
-          <Picker
-            selectedValue={rated}
-            style={styles.picker}
-            onValueChange={(itemValue, itemIndex) => setRated(itemValue)}
-          >
-            {rated_data.map((item) => (
-              <Picker.Item
-                key={item.label}
-                label={item.label}
-                value={item.value}
-              />
-            ))}
-          </Picker>
-        </View>
+        <PickerDiv
+          selectedValue={type}
+          setSelectedValue={setType}
+          data={type_data}
+        />
+        <PickerDiv
+          selectedValue={rated}
+          setSelectedValue={setRated}
+          data={rated_data}
+        />
       </View>
+
       <View style={styles.picker_group}>
-        <View style={styles.picker_div}>
-          <Picker
-            selectedValue={genre}
-            style={styles.picker}
-            onValueChange={(itemValue, itemIndex) => setGenre(itemValue)}
-          >
-            {genre_data.map((item) => (
-              <Picker.Item
-                key={item.label}
-                label={item.label}
-                value={item.value}
-              />
-            ))}
-          </Picker>
-        </View>
+        <PickerDiv
+          selectedValue={genre}
+          setSelectedValue={setGenre}
+          data={genre_data}
+        />
+
         <View style={styles.picker_div}>
           <Picker
             selectedValue={limit}

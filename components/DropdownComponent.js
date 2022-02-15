@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Picker } from "react-native";
+import { StyleSheet, View, Picker } from "react-native";
 
 const data = [
   { label: "Item 1", value: "1" },

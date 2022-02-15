@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
-  Alert,
 } from "react-native";
 
 import CustomModal from "./CustomModal";

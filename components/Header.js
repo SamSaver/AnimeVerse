@@ -8,12 +8,10 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Switch,
 } from "react-native";
 import AdvanceSearch from "./AdvanceSearch";
 import AppButton from "./AppButton";
 import CheckBox from "./CheckBox";
-// import DropdownComponent from "./DropdownComponent";
 
 export function Header({ queryListSetter, isEnabled, toggleSwitch }) {
   const [search, setSearch] = React.useState("");
