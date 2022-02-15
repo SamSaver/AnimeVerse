@@ -21,8 +21,9 @@ const DropdownComponent = () => {
         style={{ height: 50, width: 150 }}
         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
       >
-        <Picker.Item label="Java" value="java" />
-        <Picker.Item label="JavaScript" value="js" />
+        {data.map((item) => (
+          <Picker.Item key={item.label} label={item.label} value={item.value} />
+        ))}
       </Picker>
     </View>
   );
@@ -32,8 +33,9 @@ export default DropdownComponent;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 40,
+    flex: 0,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
     alignItems: "center",
   },
 });

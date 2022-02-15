@@ -29,13 +29,6 @@ const styles = StyleSheet.create({
     flex: 0.9,
     zIndex: -1,
     backgroundColor: "#EEEEEE",
-    maxHeight: "85%",
-  },
-  title: {
-    fontSize: 30,
-    textAlign: "center",
-    marginTop: 20,
-    marginBottom: 20,
   },
 });
 

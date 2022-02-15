@@ -11,19 +11,14 @@ import {
   Switch,
 } from "react-native";
 import AdvanceSearch from "./AdvanceSearch";
-import DropdownComponent from "./DropdownComponent";
+import AppButton from "./AppButton";
+import CheckBox from "./CheckBox";
+// import DropdownComponent from "./DropdownComponent";
 
-export function Header({ queryListSetter }) {
+export function Header({ queryListSetter, isEnabled, toggleSwitch }) {
   const [search, setSearch] = React.useState("");
-  const [isEnabled, setIsEnabled] = React.useState(false);
-
-  const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
-  };
 
   const handlePress = async () => {
-    console.log("Pressed");
-
     if (search.length === 0) {
       Alert.alert("Please enter a search term");
       return;
@@ -39,24 +34,6 @@ export function Header({ queryListSetter }) {
     queryListSetter(res.results);
   };
 
-  const CustomSwitch = () => (
-    <Switch
-      trackColor={{ false: "#767577", true: "#81b0ff" }}
-      style={{ marginRight: 10 }}
-      thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-      ios_backgroundColor="#3e3e3e"
-      onValueChange={toggleSwitch}
-      value={isEnabled}
-      hitSlop={{ top: 0, bottom: 0, left: 20, right: 20 }}
-    />
-  );
-
-  const AppButton = ({ onPress, title }) => (
-    <TouchableOpacity onPress={onPress} style={styles.appButtonContainer}>
-      <Text style={styles.appButtonText}>{title}</Text>
-    </TouchableOpacity>
-  );
-
   return (
     // Main Container
     <View style={styles.container}>
@@ -64,6 +41,9 @@ export function Header({ queryListSetter }) {
       <TouchableOpacity
         onPress={() => {
           queryListSetter([]), setSearch("");
+          if (isEnabled) {
+            toggleSwitch();
+          }
         }}
         style={styles.title}
       >
@@ -81,12 +61,17 @@ export function Header({ queryListSetter }) {
             onChangeText={setSearch}
             placeholder="Search"
           />
-          <AppButton onPress={handlePress} title="GO" />
+          <AppButton onPress={handlePress} title="GO" styles={styles} />
         </View>
       )}
-      {isEnabled && <DropdownComponent />}
 
-      <CustomSwitch />
+      {isEnabled && <AdvanceSearch queryListSetter={queryListSetter} />}
+
+      <CheckBox
+        style={styles.checkbox}
+        isEnabled={isEnabled}
+        toggleSwitch={toggleSwitch}
+      />
 
       <StatusBar style="auto" />
     </View>
@@ -95,7 +80,7 @@ export function Header({ queryListSetter }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.1,
+    flex: 0.5,
     width: "100%",
     backgroundColor: "#EEEEEE",
   },
@@ -122,6 +107,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+    marginTop: 10,
   },
   search_box: {
     width: "70%",
@@ -131,10 +117,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowColor: "black",
     paddingLeft: 10,
-    marginLeft: 10,
     borderWidth: 0,
-    marginTop: 10,
-    marginBottom: 10,
   },
   appButtonContainer: {
     elevation: 8,
@@ -149,5 +132,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
     textTransform: "uppercase",
+  },
+  checkbox: {
+    flex: 0,
+    alignSelf: "flex-start",
+    marginLeft: 30,
+    marginTop: 20,
   },
 });

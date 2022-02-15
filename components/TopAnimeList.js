@@ -15,8 +15,8 @@ function TopAnimeList() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Top Anime</Text>
       <ScrollView>
+        <Text style={styles.title}>Top Anime</Text>
         {topAnime.map((anime) => (
           <AnimeCard
             key={anime.mal_id}
@@ -35,15 +35,13 @@ function TopAnimeList() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.9,
+    flex: 1.5,
     zIndex: -1,
     backgroundColor: "#EEEEEE",
-    maxHeight: "85%",
   },
   title: {
     fontSize: 30,
     textAlign: "center",
-    marginTop: 20,
     marginBottom: 20,
   },
 });
